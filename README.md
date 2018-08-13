@@ -4,4 +4,4 @@ This is a simple port scanner written in Java. All it can do now is scan a host 
 
 ## Usage
 
-'java PortScanner [IP address] -p [port] / [start port]-[end port]'
+`java PortScanner [IP address] -p [port] / [start port]-[end port]`
