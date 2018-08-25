@@ -14,7 +14,16 @@ public class PortScanner {
                 System.out.println("java PortScanner [IP address] -p [start port]-[end port]");
                 System.out.println("java PortScanner [IP address] -p [port]");
             } else {
+                
                 args[2] = args[2].replaceAll("\\s", "");
+                String host = args[0];
+                
+                if ("abcdefghijklmnopqrstuvwxyz".indexOf(args[0].charAt(0)) != -1) {
+                    InetAddress addr = InetAddress.getByName(args[0]);
+                    host = addr.getHostAddress();
+                    System.out.println(host);
+                } 
+
                 if (args[2].indexOf("-") == -1) {
                     scan(args[0], Integer.parseInt(args[2]), Integer.parseInt(args[2]));
                 } else {
@@ -23,9 +32,14 @@ public class PortScanner {
                     scan(args[0], start, stop);
                 }
             }
+        } catch (UnknownHostException e) {
+            System.out.println("Couldn't find host.");
         } catch (Exception e) {
             System.out.println("");
             System.out.println(" Please check the format of your inputs. ");
+            System.out.println("Usage ---- ");
+            System.out.println("java PortScanner [IP address] -p [start port]-[end port]");
+            System.out.println("java PortScanner [IP address] -p [port]");
             System.out.println("");
         }
     }
@@ -49,8 +63,8 @@ public class PortScanner {
                 System.out.println("  Cannot connect to IP address " + ipAddress);
                 System.out.println(" ");
                 flag = false;
-                break;
-            } catch (IllegalArgumentException e) {
+            } 
+            catch (IllegalArgumentException e) {
                 System.out.println("  Port " + i + " is outside the specified range of valid port values.");
                 System.out.println(" ");
             } catch (Exception e) {
